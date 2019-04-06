@@ -35,15 +35,15 @@ public class Tile {
     public boolean move(int newX, int newY) {
         if (containingLayer.isInBounds(newX, newY)) {           // if the desired location is within bounds,
             if (containingLayer.get(newX, newY) == null) {      // if the desired location is null,
-                containingLayer.set(x, y, null);         // set the current location to null
                 containingLayer.set(newX, newY, this);   // set the desired location to this
+                containingLayer.set(x, y, null);         // set the current location to null
                 x = newX;                                       // update location to desired location
                 y = newY;
                 return true;                                    // success
             }
         } else if (containingLayer.attemptExpand(newX, newY)) { // if layer expansion was successful,
-            containingLayer.set(x, y, null);             // set the current location to null
             containingLayer.set(newX, newY, this);       // set the desired location to this
+            containingLayer.set(x, y, null);             // set the current location to null
             x = newX;                                           // update location to desired location
             y = newY;
             return true;                                        // success
@@ -55,4 +55,7 @@ public class Tile {
         return null;
     }
 
+    public void run() {
+        move(x + (Math.random() > 0.5 ? 1 : -1), y + (Math.random() > 0.5 ? 1 : 0));
+    }
 }

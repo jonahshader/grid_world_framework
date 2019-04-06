@@ -10,6 +10,11 @@ public class ArrayList2D<T> {
         this.width = width;
         this.height = height;
         arrayList = new ArrayList<>();
+
+        // populate array with null
+        for (int i = 0; i < width * height; i++) {
+            arrayList.add(null);
+        }
     }
 
     public T get(int x, int y) {

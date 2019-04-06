@@ -4,14 +4,27 @@ import jonahshader.gridframework.Tile;
 import jonahshader.gridframework.grid.Grid;
 import jonahshader.gridframework.grid.gridpart.Layer;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class MainTest {
     private Grid grid;
 
     public void execute() {
-        grid = new Grid(24, 16, "Main grid");
-        System.out.println("Test");
+        grid = new Grid(24, 16,  "Main grid");
+        for (int i = 0; i < 100; i++) {
+            int x = (int) (Math.random() * 24);
+            int y = (int) (Math.random() * 16);
 
-        print();
+            Tile newTile = new Tile(x, y, grid.getlayer());
+            if (!grid.add(newTile)) {
+                System.out.println("Tile " + i + " overlapped and could not be created.");
+            }
+        }
+
+        while (true) {
+            run();
+        }
     }
 
     public void print() {
@@ -19,14 +32,27 @@ public class MainTest {
         Layer<Tile> layer = grid.getlayer();
         for (int y = layer.getyMin(); y < layer.getyMax(); y++) {
             for (int x = layer.getxMin(); x < layer.getxMax(); x++) {
-                output.append((layer.get(x, y) == null) ? "_" : "O");
-                System.out.println("1");
-                //TODO: this is not printing. size is 0 for some reason
+                output.append((layer.get(x, y) == null) ? " " : "O");
             }
             output.append("\n");
         }
-        System.out.print(output);
+        System.out.println(output);
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    public void run() {
+        for (Tile tile : grid.getTiles()) {
+            tile.run();
+        }
+        grid.update();
+//        grid.remove(grid.getTiles().get(0));
+        print();
+    }
+
 
     public static void main(String[] args) {
         new MainTest().execute();

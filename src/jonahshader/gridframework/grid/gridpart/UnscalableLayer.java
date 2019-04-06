@@ -41,12 +41,12 @@ public class UnscalableLayer<T> implements Layer<T> {
 
     @Override
     public int getxMax() {
-        return 0;
+        return getWidth();
     }
 
     @Override
     public int getyMin() {
-        return getWidth();
+        return 0;
     }
 
     @Override

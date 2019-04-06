@@ -20,6 +20,7 @@ public class Grid {
 
     public Grid(int width, int height, String name) {
         layer = new UnscalableLayer<>(width, height, name);
+        tiles = new QueuedArrayList<>();
     }
 
     public boolean add(Tile tile) {

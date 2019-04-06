@@ -16,13 +16,13 @@ public class ScalableLayer<T> implements Layer<T> {
         array.expandForward(yMax);
         array.expandBackward(yMin);
 
-        for (int x = xMin; x < xMax; x++) {
+//        for (int x = xMin; x < xMax; x++) {
             for (int y = yMin; y < yMax; y++) {
                 array.set(y, new BiDirectionalArrayList<>());
                 array.get(y).expandBackward(xMin);
                 array.get(y).expandForward(xMax);
             }
-        }
+//        }
     }
 
     @Override
