@@ -5,7 +5,6 @@ import jonahshader.gridframework.grid.Grid;
 import jonahshader.gridframework.grid.gridpart.Layer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainTest {
     private Grid grid;
@@ -16,7 +15,7 @@ public class MainTest {
             int x = (int) (Math.random() * 24);
             int y = (int) (Math.random() * 16);
 
-            Tile newTile = new Tile(x, y, grid.getlayer());
+            Tile newTile = new Tile(x, y, grid.getLayer());
             if (!grid.add(newTile)) {
                 System.out.println("Tile " + i + " overlapped and could not be created.");
             }
@@ -29,7 +28,7 @@ public class MainTest {
 
     public void print() {
         StringBuilder output = new StringBuilder();
-        Layer<Tile> layer = grid.getlayer();
+        Layer<Tile> layer = grid.getLayer();
         for (int y = layer.getyMin(); y < layer.getyMax(); y++) {
             for (int x = layer.getxMin(); x < layer.getxMax(); x++) {
                 output.append((layer.get(x, y) == null) ? " " : "O");
@@ -49,10 +48,13 @@ public class MainTest {
             tile.run();
         }
         grid.update();
-//        grid.remove(grid.getTiles().get(0));
+        grid.remove(grid.getTiles().get(0));
+        for (int x = 0; x < grid.getLayer().getWidth(); x++) {
+            grid.add(new Tile(x, 0, grid.getLayer()));
+        }
+        grid.update();
         print();
     }
-
 
     public static void main(String[] args) {
         new MainTest().execute();

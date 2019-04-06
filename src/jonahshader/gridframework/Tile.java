@@ -56,6 +56,6 @@ public class Tile {
     }
 
     public void run() {
-        move(x + (Math.random() > 0.5 ? 1 : -1), y + (Math.random() > 0.5 ? 1 : 0));
+        move(x + (Math.random() > 0.5 ? 1 : -1), y + (Math.random() > 0.5 ? 1 : -0));
     }
 }

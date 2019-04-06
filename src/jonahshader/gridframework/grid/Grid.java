@@ -53,12 +53,12 @@ public class Grid {
         } else if (tiles.getArrayList().contains(tile)) {       // the tile isn't where it says it is, but if it is in the sequential array,
             tiles.queueRemove(tile);                            // queue it for removal from the sequential array
             //TODO: maybe I should report a lost tile here? Although a lost tile would indicate a problem with the framework
+            //TODO: maybe search entire layer to look for missing tile?
             return true;                                        // success
         }
         return false;                                           // fail
     }
 
-    // TODO: make these methods:
 
     public ArrayList<Tile> getTiles() {
         return tiles.getArrayList();
@@ -72,7 +72,7 @@ public class Grid {
         tiles.update();
     }
 
-    public Layer<Tile> getlayer() {
+    public Layer<Tile> getLayer() {
         return layer;
     }
 }
